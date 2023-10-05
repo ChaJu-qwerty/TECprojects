@@ -1,3 +1,4 @@
+//cosa basicona para el motor dc
 int speedPin = 11;
 int dirPin1 = 12;
 int dirPin2 = 13;
