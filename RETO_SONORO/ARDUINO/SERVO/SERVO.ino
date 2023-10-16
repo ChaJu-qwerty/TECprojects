@@ -1,3 +1,13 @@
+#include <VarSpeedServo.h>
+
+VarSpeedServo servo1;
+VarSpeedServo servo2;
+VarSpeedServo servo3;
+int Pinservo1=9;
+int Pinservo2=10;
+int Pinservo3=11;
+
+void setup() {
   // put your setup code here, to run once:
 servo1.attach(Pinservo1);
 servo2.attach(Pinservo2);
