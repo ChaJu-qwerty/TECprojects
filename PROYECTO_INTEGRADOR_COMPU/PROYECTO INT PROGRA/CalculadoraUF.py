@@ -391,16 +391,68 @@ def Ventanagraficadora():
     BotonGraficadora.place()
 
 def ventanaquizz():
-    VentanaQuiz=tkinter.Toplevel()
-    VentanaQuiz.title("Calculadora de funciones")
-    VentanaQuiz.config(bg = "#033E72")
-    VentanaQuiz.geometry("500x600")
-    #etiqueta de las fucniones
-    etiqueta = tkinter.Label(VentanaQuiz, text="Seccion de quizz",fg="#FFFFFF")
-    etiqueta.pack()
-    etiqueta.config(bg="#033E72")
+    class QuizApp(tkinter.Toplevel):
+        def __init__(self):
+            super().__init__()
 
-    
+            self.preguntas = [
+            {"pregunta": "¿En que unidad se mide la energia mecanica?",
+             "opciones": ["Kilogramos", "Newton", "Joules", "Litros"],
+             "respuesta": "Joules"},
+            {"pregunta": "¿Cuál es la fórmula de fuerza?",
+             "opciones": ["f*d", "f*g", "m*a", "s*1"],
+             "respuesta": "m*a"},
+            {"pregunta": "Una moto tiene una masa de 100kg y una aceleracion de 3 m/s^2 ¿Cuál es su fuerza?",
+             "opciones": ["285N", "150N", "300N", "213N"],
+             "respuesta": "300N"},
+            {"pregunta": "¿Cual es la energia que esta almacenada en un objeto debido a su posición.?",
+             "opciones": ["Potencial", "Cinetica", "Mecanica", "Calorica"],
+             "respuesta": "Potencial"},
+            {"pregunta": "Es la capacidad física para realizar un trabajo o un movimiento",
+             "opciones": ["Masa", "Fuerza", "Aceleración", "Ganas"],
+             "respuesta": "Fuerza"}]
+            
+            self.puntos = 0
+            self.pregunta_actual = 0
+
+            self.label_pregunta = tkinter.Label(self, text="")
+            self.label_pregunta.pack()
+
+            self.botones_opciones = []
+            for i in range(4):
+                boton = tkinter.Button(self, text="", command=lambda i=i: self.verificar_respuesta(i))
+                self.botones_opciones.append(boton)
+                boton.pack()
+
+            self.actualizar_pregunta()
+
+        def actualizar_pregunta(self):
+            if self.pregunta_actual < len(self.preguntas):
+                pregunta = self.preguntas[self.pregunta_actual]["pregunta"]
+                opciones = self.preguntas[self.pregunta_actual]["opciones"]
+                self.respuesta_correcta = self.preguntas[self.pregunta_actual]["respuesta"]
+
+                self.label_pregunta.config(text=pregunta)
+
+                for i, opcion in enumerate(opciones):
+                    self.botones_opciones[i].config(text=opcion)
+
+        def verificar_respuesta(self, indice):
+            respuesta_elegida = self.botones_opciones[indice]["text"]
+            if respuesta_elegida == self.respuesta_correcta:
+                self.puntos += 1
+
+            self.pregunta_actual += 1
+            self.actualizar_pregunta()
+
+            if self.pregunta_actual == len(self.preguntas):
+                messagebox.showinfo("Fin del quiz", f"Puntos obtenidos: {self.puntos}")
+
+    if __name__ == "__main__":
+        app = QuizApp()
+        app.mainloop()
+
+
 
 #boton para ir a la ventana calculadora-graficadora-quizzes
 BotonCalculadora= tkinter.Button(raiz, text = "Calculadora", command = inicioCalc)
