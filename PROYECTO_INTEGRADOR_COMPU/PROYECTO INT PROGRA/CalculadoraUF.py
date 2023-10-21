@@ -11,7 +11,7 @@ g = 9.8
 raiz=tkinter.Tk()
 raiz.title("Calculadora de Dinamica (Fisica)") #titulo a la ventana
 raiz.iconbitmap("iconoATM.ico")
-raiz.geometry("500x600")
+raiz.geometry("500x200")
 raiz.resizable(0,0) #ancho,alto, 0,0 = no se puede cambiar tamaño= Fañse,False
 raiz.config(background="#033E72")
 #etiqueta bienvenido 1
@@ -29,16 +29,16 @@ def cfloat(numero):
 #def matematicos/fisicos
 #ALONDRA
 def calcular_trabajo():
-    ECF = int(energia_cinetica_final.get())
-    ECI = int(energia_cinetica_inicial.get())
+    ECF = float(energia_cinetica_final.get())
+    ECI = float(energia_cinetica_inicial.get())
 
     if ECF >= 0 and ECI >= 0:
         resultado.set(cfloat(ECF)-cfloat(ECI))
         mostrarResultado()
 
 def calcular_energia_potencial_gravitacional():
-    Massa1=int(masa1.get())
-    alltura=int(altura.get())
+    Massa1=float(masa1.get())
+    alltura=float(altura.get())
 
     if Massa1 >=0 and alltura >=0:
         resultado.set(cfloat(Massa1)*cfloat(alltura)*g)
@@ -46,9 +46,9 @@ def calcular_energia_potencial_gravitacional():
 
 def calcular_fuerza_gravitatoria():
     G = 6.67430e-11  
-    Massa1=int(masa1.get())
-    Massa2=int(masa2.get())
-    distanciaa=int(distancia.get())
+    Massa1=float(masa1.get())
+    Massa2=float(masa2.get())
+    distanciaa=float(distancia.get())
 
     if Massa1 >=0 and Massa2 >=0 and distanciaa>=0:
         resultado.set(((cfloat(Massa1)*cfloat(Massa2))*G)/distanciaa**2)
@@ -56,8 +56,8 @@ def calcular_fuerza_gravitatoria():
 
 
 def calculo_energia_mecanica():
-    EC=int(energia_cinetica_inicial.get())
-    EP=int(energia_potencial.get())
+    EC=float(energia_cinetica_inicial.get())
+    EP=float(energia_potencial.get())
 
     if EC >=0 and EP >=0:
         resultado.set(cfloat(EC)+cfloat(EP))
@@ -67,9 +67,9 @@ def calculo_energia_mecanica():
 #KAREN
 def tiro_parabólico():
   # Convertir el ángulo de grados a radianes
-  AG=int(angulo_grados.get())
-  VI = int(velocidad_inicial.get())
-  tiempoo =int(tiempo.get())
+  AG=float(angulo_grados.get())
+  VI = float(velocidad_inicial.get())
+  tiempoo =float(tiempo.get())
   anguloo=math.cos(AG)
   # Usar la fórmula Δx = v0 * cos(a) * t para calcular el desplazamiento del objeto
   if tiempoo >=0:
@@ -79,9 +79,9 @@ def tiro_parabólico():
 
 # Definir una función para calcular el movimiento rectilíneo uniforme variado
 def movimiento_variado():
-    VelI=int(velocidad_inicial.get())
-    Ace=int(aceleracionn.get())
-    tiem=int(tiempo.get())
+    VelI=float(velocidad_inicial.get())
+    Ace=float(aceleracionn.get())
+    tiem=float(tiempo.get())
     velf=VelI+(Ace*tiem)
 
     resultado.set(cfloat(velf))
@@ -89,8 +89,8 @@ def movimiento_variado():
   
 
 def movimiento_uniforme():
-    velI = int(velocidad_inicial.get())
-    tiem = int(tiempo.get())
+    velI = float(velocidad_inicial.get())
+    tiem = float(tiempo.get())
 
     if tiem >= 0:
         resultado.set(cfloat(velI)*cfloat(tiem))
@@ -98,8 +98,8 @@ def movimiento_uniforme():
 
 def caída_libre():
   # Usar la fórmula Vo * t + 1/2 * g * t^2 para calcular la distancia recorrida por el objeto
-    VelI=int(velocidad_inicial.get())
-    tiem=int(tiempo.get())
+    VelI=float(velocidad_inicial.get())
+    tiem=float(tiempo.get())
 
     if tiem >0:
         distancia = VelI * tiem + 0.5 * g * (tiem ** 2)
@@ -108,8 +108,8 @@ def caída_libre():
 
 #DULCE
 def Ecinetica():
-    masa=int(masa1.get())
-    velo=int(velocidad_inicial.get())
+    masa=float(masa1.get())
+    velo=float(velocidad_inicial.get())
 
     if masa > 0:
         ener=((masa*(velo*velo))/2)
@@ -117,8 +117,8 @@ def Ecinetica():
         mostrarResultado()
 
 def trabajo():
-    fuer=int(furza.get())
-    desp=int(desplazamiento.get())
+    fuer=float(furza.get())
+    desp=float(desplazamiento.get())
 
     if fuer >= 0 and desp >=0:
         trab= fuer*desp
@@ -127,8 +127,8 @@ def trabajo():
 
 
 def ffuerza():
-    masa = int(masa1.get())
-    ace = int(aceleracionn.get())
+    masa = float(masa1.get())
+    ace = float(aceleracionn.get())
 
     if masa > 0:
         fue=masa*ace
@@ -137,9 +137,9 @@ def ffuerza():
 
 
 def aceleracion():
-    velf=int(velocidad_final.get())
-    veli=int(velocidad_inicial.get())
-    tie=int(tiempo.get())
+    velf=float(velocidad_final.get())
+    veli=float(velocidad_inicial.get())
+    tie=float(tiempo.get())
 
     if tie >=0:
         ace=(velf-veli)/tie
@@ -166,9 +166,10 @@ aceleracionn=tkinter.StringVar()
 furza=tkinter.StringVar()
 desplazamiento=tkinter.StringVar()
 
+#graficadora del tiro parabolico
 def graficadora():
-    AG = int(angulo_grados.get())
-    VI = int(velocidad_inicial.get())
+    AG = float(angulo_grados.get())
+    VI = float(velocidad_inicial.get())
 
     angulo_radianes = math.radians(AG)
 
@@ -202,6 +203,10 @@ def graficadora():
     ax = figura.add_subplot(111)
     ax.plot(posiciones_x, posiciones_y)
 
+    # Establecer etiquetas de ejes
+    ax.set_xlabel('Posición en el eje X')
+    ax.set_ylabel('Posición en el eje Y')
+
     # Crear un widget de lienzo para mostrar la figura
     canvas = FigureCanvasTkAgg(figura, master=frame_grafico)
     canvas.draw()
@@ -220,7 +225,7 @@ def inicioCalc():
     etiqueta.pack()
     etiqueta.config(bg="#033E72")
 
-    #coso meter valroes 
+    #coso meter valoroes 
     EngCinL=tkinter.Label(ventanaCal, text="Energia cinetica inicial (o la unica que tengas):",fg="black",font=("Arial", 10,"bold"))
     EngCinL.pack()
     EngCinL.place(x=50, y=30)
@@ -372,11 +377,11 @@ def inicioCalc():
     return energia_cinetica_inicial, energia_cinetica_final
 
 
-def Ventanagraficadora():
+def VentanaGraficadora():
     ventanaGraf=tkinter.Toplevel()
     ventanaGraf.title("Calculadora de funciones")
     ventanaGraf.config(bg = "#033E72")
-    ventanaGraf.geometry("500x600")
+    ventanaGraf.geometry("500x400")
     #etiqueta de las fucniones
     etiqueta = tkinter.Label(ventanaGraf, text="Esta es la seccion de grafica de tiro parabolico",fg="#FFFFFF")
     etiqueta.pack()
@@ -394,7 +399,7 @@ def Ventanagraficadora():
     BotonGraficadora.pack()
     BotonGraficadora.place()
 
-def ventanaquizz():
+def ventanaQuizz():
     class QuizApp(tkinter.Toplevel):
         def __init__(self):
             super().__init__()
@@ -463,11 +468,11 @@ BotonCalculadora= tkinter.Button(raiz, text = "Calculadora", command = inicioCal
 BotonCalculadora.pack()
 BotonCalculadora.place()
 
-BotonCalculadora= tkinter.Button(raiz, text = "Graficadora", command = Ventanagraficadora)
+BotonCalculadora= tkinter.Button(raiz, text = "Graficadora", command = VentanaGraficadora)
 BotonCalculadora.pack()
 BotonCalculadora.place()
 
-BotonCalculadora= tkinter.Button(raiz, text = "Quizz", command = ventanaquizz)
+BotonCalculadora= tkinter.Button(raiz, text = "Quizz", command = ventanaQuizz)
 BotonCalculadora.pack()
 BotonCalculadora.place()
 
