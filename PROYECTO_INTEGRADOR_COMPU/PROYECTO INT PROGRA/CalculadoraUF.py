@@ -3,6 +3,7 @@ from tkinter import messagebox
 import math
 from matplotlib.figure import Figure
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+from tkinter import ttk
 g = 9.8
 
 #el def menu debe e tener la pagina de inicio
@@ -166,7 +167,7 @@ furza=tkinter.StringVar()
 desplazamiento=tkinter.StringVar()
 
 def graficadora():
-    AG=int(angulo_grados.get())
+    AG = int(angulo_grados.get())
     VI = int(velocidad_inicial.get())
 
     angulo_radianes = math.radians(AG)
@@ -175,28 +176,31 @@ def graficadora():
     v0y = VI * math.sin(angulo_radianes)
     t_max = 2 * v0y / g
     t_intervalo = 0.01
-    t = 0 #tiempo inicial
+    t = 0  # tiempo inicial
     tiempos = [t]
     posiciones_x = [0]
     posiciones_y = [0]
 
-    # Calculamos las posiciones en cada instante de tiempo
     while t <= t_max:
         t += t_intervalo
         tiempos.append(t)
         x = v0x * t
-        y = v0y * t - 0.5 * g * t**2
+        y = v0y * t - 0.5 * g * t ** 2
         posiciones_x.append(x)
         posiciones_y.append(y)
-    
+
+    # Crear una nueva ventana Toplevel
+    ventana_grafico = tkinter.Toplevel(raiz)
+    ventana_grafico.title("Tiro parabolico")
+
+    # Crear un marco en la nueva ventana
+    frame_grafico = ttk.Frame(ventana_grafico)
+    frame_grafico.pack()
+
     # Crear una figura de Matplotlib
     figura = Figure()
     ax = figura.add_subplot(111)
     ax.plot(posiciones_x, posiciones_y)
-
-    # Limpiar el contenedor del gráfico
-    for widget in frame_grafico.winfo_children():
-        widget.destroy()
 
     # Crear un widget de lienzo para mostrar la figura
     canvas = FigureCanvasTkAgg(figura, master=frame_grafico)
